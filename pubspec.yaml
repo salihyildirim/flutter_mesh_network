@@ -1,0 +1,36 @@
+name: flutter_mesh_network
+description: >
+  A cross-platform Flutter plugin for offline mesh networking.
+  Enables device-to-device communication via BLE, Wi-Fi Direct,
+  and Wi-Fi Aware (Android) / MultipeerConnectivity (iOS)
+  without any internet or cellular infrastructure.
+version: 0.1.0
+homepage: https://github.com/salih/flutter_mesh_network
+repository: https://github.com/salih/flutter_mesh_network
+issue_tracker: https://github.com/salih/flutter_mesh_network/issues
+
+environment:
+  sdk: ^3.5.0
+  flutter: '>=3.22.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_blue_plus: ^1.35.0
+  sqflite: ^2.4.1
+  path: ^1.9.1
+  uuid: ^4.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.fluttermeshnetwork.flutter_mesh_network
+        pluginClass: FlutterMeshNetworkPlugin
+      ios:
+        pluginClass: FlutterMeshNetworkPlugin
