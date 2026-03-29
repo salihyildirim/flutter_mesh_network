@@ -1,3 +1,8 @@
+## 0.1.1
+
+- Upgrade flutter_blue_plus to ^2.2.1.
+- Shorten package description for pub.dev scoring.
+
 ## 0.1.0
 
 - Initial release.
