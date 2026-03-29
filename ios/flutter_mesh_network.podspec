@@ -11,9 +11,9 @@ Cross-platform mesh networking plugin. On iOS this wraps MultipeerConnectivity
 (peer discovery, encrypted sessions, messaging) and CoreBluetooth peripheral
 mode (GATT server, BLE advertising, chunked message assembly).
                        DESC
-  s.homepage         = 'https://github.com/salih/flutter_mesh_network'
+  s.homepage         = 'https://github.com/salihyildirim/flutter_mesh_network'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Salih' => 'salih@geamesh.dev' }
+  s.author           = { 'Salih Yildirim' => 'salihyildirimce@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
