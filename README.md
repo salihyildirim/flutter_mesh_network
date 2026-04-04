@@ -87,6 +87,10 @@ const config = MeshConfig(
 | `maxPerformance` | All transports active |
 | `emergency` | All transports, aggressive scanning |
 
+## Important: Physical Devices Only
+
+Mesh networking relies on hardware-level radios (BLE, Wi-Fi Direct, Wi-Fi Aware, MultipeerConnectivity). **Emulators and simulators do not support these technologies.** You must test on real physical devices.
+
 ## Android Setup
 
 Add to `android/app/build.gradle`:

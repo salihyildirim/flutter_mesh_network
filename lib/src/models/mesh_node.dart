@@ -68,6 +68,7 @@ class MeshNode {
     return _haversine(lat1, lng1, lat2, lng2);
   }
 
+  /// Returns a copy of this node with the given fields replaced.
   MeshNode copyWith({
     NodeStatus? status,
     double? latitude,
@@ -95,6 +96,7 @@ class MeshNode {
   // Serialization
   // ---------------------------------------------------------------------------
 
+  /// Converts this node to a JSON-compatible map.
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
@@ -117,6 +119,7 @@ class MeshNode {
     return map;
   }
 
+  /// Creates a [MeshNode] from a JSON map (as produced by [toJson]).
   factory MeshNode.fromJson(Map<String, dynamic> json) {
     return MeshNode(
       id: json['id'] as String,

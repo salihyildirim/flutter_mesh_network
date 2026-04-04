@@ -105,6 +105,7 @@ class MeshConfig {
         assert(wifiDirectPort >= 1 && wifiDirectPort <= 65535,
             'wifiDirectPort must be in the range 1–65535');
 
+  /// Returns a copy of this configuration with the given fields replaced.
   MeshConfig copyWith({
     String? serviceName,
     String? bleServiceUuid,

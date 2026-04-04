@@ -12,12 +12,22 @@ class MeshLogger {
   /// Master switch.  When `false`, all log calls are no-ops.
   static bool enabled = true;
 
+  /// Logs a BLE transport message.
   static void ble(String message) => _log(message, name: 'mesh.ble');
+
+  /// Logs a Wi-Fi Direct transport message.
   static void wifi(String message) => _log(message, name: 'mesh.wifi');
+
+  /// Logs a Nearby (Wi-Fi Aware / MultipeerConnectivity) transport message.
   static void nearby(String message) => _log(message, name: 'mesh.nearby');
+
+  /// Logs a core mesh routing message.
   static void mesh(String message) => _log(message, name: 'mesh.core');
+
+  /// Logs a storage layer message.
   static void storage(String message) => _log(message, name: 'mesh.storage');
 
+  /// Logs an error with the given [tag] and optional [error] object.
   static void error(String tag, String message, [Object? error]) {
     if (!enabled) return;
     dev.log(

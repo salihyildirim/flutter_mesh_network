@@ -76,6 +76,7 @@ class MeshStorage {
     );
   }
 
+  /// Closes the database connection and releases resources.
   Future<void> close() async {
     await _db?.close();
     _db = null;
@@ -85,6 +86,7 @@ class MeshStorage {
   // Messages
   // ---------------------------------------------------------------------------
 
+  /// Persists a [message] to the database, ignoring duplicates.
   Future<void> insertMessage(MeshMessage message) async {
     final db = await _database;
     await db.insert(
@@ -94,6 +96,7 @@ class MeshStorage {
     );
   }
 
+  /// Returns `true` if a message with the given [id] is already stored.
   Future<bool> messageExists(String id) async {
     final db = await _database;
     final rows = await db.query(
@@ -128,6 +131,7 @@ class MeshStorage {
     return rows.map(MeshMessage.fromJson).toList();
   }
 
+  /// Deletes messages whose [MeshMessage.expiresAt] is in the past.
   Future<int> deleteExpiredMessages() async {
     final db = await _database;
     final now = DateTime.now().toIso8601String();
@@ -138,6 +142,7 @@ class MeshStorage {
   // Nodes
   // ---------------------------------------------------------------------------
 
+  /// Inserts or replaces a [node] in the database.
   Future<void> upsertNode(MeshNode node) async {
     final db = await _database;
     await db.insert(
@@ -147,12 +152,14 @@ class MeshStorage {
     );
   }
 
+  /// Returns all nodes stored in the database.
   Future<List<MeshNode>> getAllNodes() async {
     final db = await _database;
     final rows = await db.query('nodes');
     return rows.map(MeshNode.fromJson).toList();
   }
 
+  /// Deletes nodes not seen since [MeshConfig.staleNodeThreshold].
   Future<int> deleteStaleNodes() async {
     final db = await _database;
     final cutoff = DateTime.now()

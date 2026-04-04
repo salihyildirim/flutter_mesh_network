@@ -48,10 +48,16 @@ class MeshRouter {
   Timer? _forwardTimer;
   Timer? _cleanupTimer;
 
+  /// Stream of all incoming and outgoing mesh messages.
   Stream<MeshMessage> get messages => _messageStream.stream;
+
+  /// Stream of peer node discovery and update events.
   Stream<MeshNode> get nodes => _nodeStream.stream;
+
+  /// Unmodifiable snapshot of all known nodes, keyed by id.
   Map<String, MeshNode> get knownNodes => Map.unmodifiable(_nodes);
 
+  /// The number of nodes currently considered online.
   int get onlineNodeCount =>
       _nodes.values.where((n) => n.isOnline()).length;
 
@@ -114,6 +120,7 @@ class MeshRouter {
   // Strategy
   // ---------------------------------------------------------------------------
 
+  /// Changes the active transport strategy and resets the scan timer.
   void setStrategy(TransportStrategy strategy) {
     _forwardTimer?.cancel();
     _strategy = strategy;
@@ -122,6 +129,7 @@ class MeshRouter {
     MeshLogger.mesh('Strategy changed to ${strategy.name}');
   }
 
+  /// Updates the device battery level (0.0–1.0) to adjust transport usage.
   void setBatteryLevel(double level) {
     _batteryLevel = level;
     // Reset forward timer — scan interval depends on battery level.
@@ -134,6 +142,7 @@ class MeshRouter {
   // Outgoing
   // ---------------------------------------------------------------------------
 
+  /// Creates and dispatches a text message through the mesh.
   Future<MeshMessage> sendText(
     String text,
     String senderName, {
@@ -151,6 +160,7 @@ class MeshRouter {
     return msg;
   }
 
+  /// Creates and dispatches an SOS distress signal, switching to emergency strategy.
   Future<MeshMessage> sendSos(
     String senderName,
     double latitude,
@@ -184,6 +194,7 @@ class MeshRouter {
     MeshLogger.mesh('SOS cancelled, strategy reverted to ${restored.name}');
   }
 
+  /// Broadcasts the user's current location as a beacon message.
   Future<void> broadcastLocation(
     String senderName,
     double latitude,

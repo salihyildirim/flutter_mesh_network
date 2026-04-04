@@ -1,3 +1,10 @@
+## 0.1.2
+
+- Add Swift Package Manager support (`darwin/flutter_mesh_network/Package.swift`).
+- Complete API documentation for all public members (100% coverage).
+- Add "Physical Devices Only" notice to README.
+- Improve example app: error handling, stream subscription cleanup, online peer count, SOS message icon, empty state placeholder.
+
 ## 0.1.1
 
 - Upgrade flutter_blue_plus to ^2.2.1.

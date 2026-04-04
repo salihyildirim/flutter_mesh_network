@@ -122,6 +122,9 @@ class MeshMessage {
   // Serialization
   // ---------------------------------------------------------------------------
 
+  /// Converts this message to a JSON-compatible map.
+  ///
+  /// Enums are serialized as their string [name] for wire safety.
   Map<String, dynamic> toJson() => {
         'id': id,
         'senderId': senderId,
@@ -139,6 +142,7 @@ class MeshMessage {
         'visitedNodes': visitedNodes,
       };
 
+  /// Creates a [MeshMessage] from a JSON map (as produced by [toJson]).
   factory MeshMessage.fromJson(Map<String, dynamic> json) {
     return MeshMessage(
       id: json['id'] as String,
@@ -180,9 +184,10 @@ class MeshMessage {
     return map;
   }
 
-  /// Wire-format encode / decode for transport layers.
+  /// Encodes this message as a JSON string for transmission over transports.
   String encode() => jsonEncode(toJson());
 
+  /// Decodes a JSON string (as produced by [encode]) into a [MeshMessage].
   static MeshMessage decode(String data) =>
       MeshMessage.fromJson(jsonDecode(data) as Map<String, dynamic>);
 
