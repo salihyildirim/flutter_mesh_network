@@ -1,3 +1,8 @@
+## 0.1.3
+
+- Fix BLE advertising crash on Android SDK 36 (`addManufacturerSpecificData` removed).
+- Use `addServiceData` for BLE location advertising with backward-compatible scan parsing.
+
 ## 0.1.2
 
 - Add Swift Package Manager support (`darwin/flutter_mesh_network/Package.swift`).

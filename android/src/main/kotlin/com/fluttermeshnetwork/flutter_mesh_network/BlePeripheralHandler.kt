@@ -378,7 +378,7 @@ class BlePeripheralHandler(private val context: Context) {
         val lat = latitude
         val lng = longitude
         if (lat != null && lng != null) {
-            builder.addManufacturerSpecificData(MANUFACTURER_ID, encodeLocation(lat, lng))
+            builder.addServiceData(ParcelUuid(SERVICE_UUID), encodeLocation(lat, lng))
         }
 
         return builder.build()

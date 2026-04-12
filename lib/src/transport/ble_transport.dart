@@ -198,13 +198,17 @@ class BleTransport implements MeshTransport {
     final nodeName = name.replaceFirst(prefix, '');
 
     double? lat, lng;
+    // Read location from service data (primary) or manufacturer data (legacy).
+    final svcData = result.advertisementData.serviceData;
     final mfgData = result.advertisementData.manufacturerData;
-    if (mfgData.isNotEmpty) {
-      final bytes = mfgData[0x4745] ?? mfgData.values.first;
-      if (bytes.length >= 16) {
-        lat = _bytesToDouble(bytes.sublist(0, 8));
-        lng = _bytesToDouble(bytes.sublist(8, 16));
-      }
+    final locationBytes = svcData.values.isNotEmpty
+        ? svcData.values.first
+        : mfgData.isNotEmpty
+            ? (mfgData[0x4745] ?? mfgData.values.first)
+            : null;
+    if (locationBytes != null && locationBytes.length >= 16) {
+      lat = _bytesToDouble(locationBytes.sublist(0, 8));
+      lng = _bytesToDouble(locationBytes.sublist(8, 16));
     }
 
     final node = MeshNode(
